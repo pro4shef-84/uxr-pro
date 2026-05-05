@@ -1,5 +1,7 @@
 import Link from "next/link";
 import AuditWidget from "@/components/AuditWidget";
+import AgentTicker from "@/components/AgentTicker";
+import AgentCounter from "@/components/AgentCounter";
 
 const services = [
   {
@@ -39,9 +41,12 @@ export default function Home() {
       <section className="relative bg-gradient-to-br from-brand-900 via-brand-700 to-indigo-500 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 py-20 md:py-28 text-center">
-          <span className="inline-block mb-4 px-4 py-1 bg-white/10 rounded-full text-sm font-medium tracking-wide">
-            AI Automation Studio
-          </span>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+            <span className="px-4 py-1 bg-white/10 rounded-full text-sm font-medium tracking-wide">
+              AI Automation Studio
+            </span>
+            <AgentCounter />
+          </div>
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-4">
             Your team is losing 10+ hours<br className="hidden sm:block" /> a week to work AI should be doing.
           </h1>
@@ -56,6 +61,8 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      <AgentTicker />
 
       {/* Services preview */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-20">

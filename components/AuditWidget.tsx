@@ -225,18 +225,29 @@ export default function AuditWidget() {
 
           {/* 3 automations */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {result.automations.map((a, i) => (
-              <div key={i} className="bg-white rounded-2xl p-5 shadow-xl border-l-2 border-indigo-400">
-                <span className="inline-block text-xs font-bold text-brand-600 bg-brand-50 rounded-full px-2 py-0.5 mb-3">
-                  #{i + 1}
-                </span>
-                <h3 className="font-bold text-gray-900 mb-2 leading-snug">{a.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-3">{a.description}</p>
-                <span className="text-xs bg-gray-100 text-gray-600 rounded-full px-3 py-1 font-medium">
-                  {a.tool}
-                </span>
-              </div>
-            ))}
+            {result.automations.map((a, i) => {
+              const hrs = String(2 + i).padStart(2, "0");
+              const mins = String(Math.floor(Math.random() * 59)).padStart(2, "0");
+              return (
+                <div
+                  key={i}
+                  className="bg-white rounded-2xl p-5 shadow-xl border-l-2 border-indigo-400"
+                  style={{ animation: `fade-up 0.4s ease-out ${i * 0.15}s both` }}
+                >
+                  <p className="font-mono text-xs text-slate-400 mb-2">
+                    ↳ run completed · 0{hrs}:{mins} AM · 0.{3 + i}s
+                  </p>
+                  <span className="inline-block text-xs font-bold text-brand-600 bg-brand-50 rounded-full px-2 py-0.5 mb-3">
+                    #{i + 1}
+                  </span>
+                  <h3 className="font-bold text-gray-900 mb-2 leading-snug">{a.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed mb-3">{a.description}</p>
+                  <span className="text-xs bg-gray-100 text-gray-600 rounded-full px-3 py-1 font-medium">
+                    {a.tool}
+                  </span>
+                </div>
+              );
+            })}
           </div>
 
           {/* Quick win */}
