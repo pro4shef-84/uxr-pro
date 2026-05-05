@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About — AutomateIQ",
+  title: "About — Random Creation",
   description:
-    "AutomateIQ is an AI automation consultancy helping growing businesses eliminate manual work and unlock scale.",
+    "Random Creation is an AI automation consultancy helping growing businesses eliminate manual work and unlock scale.",
 };
 
 const values = [
@@ -29,7 +29,7 @@ export default function About() {
   return (
     <>
       <section className="bg-gradient-to-b from-brand-50 to-white py-20 text-center px-4">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">About AutomateIQ</h1>
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">About Random Creation</h1>
         <p className="text-gray-500 max-w-xl mx-auto text-lg">
           We&apos;re a small, senior team obsessed with one thing: making your business run without you having to babysit it.
         </p>
@@ -39,7 +39,7 @@ export default function About() {
       <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-20">
         <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-5">
           <p>
-            AutomateIQ was founded after watching talented teams burn hundreds of hours a month on work
+            Random Creation was founded after watching talented teams burn hundreds of hours a month on work
             that software could — and should — be doing for them. Copy-pasting between systems. Manually
             following up on leads. Building reports by hand every Friday.
           </p>

@@ -17,8 +17,9 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-extrabold text-brand-600 tracking-tight">
-            AutomateIQ
+          <span className="text-xl font-extrabold tracking-tight">
+            <span className="text-brand-600">Random</span>
+            <span className="text-gray-800"> Creation</span>
           </span>
         </Link>
 

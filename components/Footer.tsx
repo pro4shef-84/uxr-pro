@@ -5,9 +5,11 @@ export default function Footer() {
     <footer className="bg-brand-900 text-gray-300">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
-          <p className="text-white text-xl font-extrabold tracking-tight mb-2">AutomateIQ</p>
+          <p className="text-white text-xl font-extrabold tracking-tight mb-2">
+            <span className="text-indigo-300">Random</span> Creation
+          </p>
           <p className="text-sm text-gray-400 leading-relaxed">
-            AI-powered automation consulting that turns hours of manual work into minutes.
+            AI-powered automation studio. We turn your most painful manual work into intelligent, self-running systems.
           </p>
         </div>
 
@@ -32,13 +34,13 @@ export default function Footer() {
         <div>
           <p className="text-white font-semibold mb-3">Contact</p>
           <ul className="space-y-2 text-sm">
-            <li>hello@automateiq.io</li>
+            <li>hello@randomcreation.io</li>
             <li>Denver, CO</li>
           </ul>
         </div>
       </div>
       <div className="border-t border-brand-700/50 text-center py-4 text-xs text-gray-500">
-        © {new Date().getFullYear()} AutomateIQ. All rights reserved.
+        © {new Date().getFullYear()} Random Creation. All rights reserved.
       </div>
     </footer>
   );

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Services & Pricing — AutomateIQ",
+  title: "Services & Pricing — Random Creation",
   description:
     "Productized AI automation services for growing businesses. Workflow Automation, AI Growth Engine, and Enterprise AI Transformation packages.",
 };

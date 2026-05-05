@@ -4,12 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "AutomateIQ — AI Automation Consulting",
+  title: "Random Creation — AI Automation Studio",
   description:
-    "AutomateIQ helps growing businesses eliminate manual work with AI-powered automation. Custom workflows, AI agents, and integration consulting.",
+    "Random Creation builds AI-powered automation systems that eliminate manual work. Describe your bottleneck and our AI maps your solution instantly.",
   openGraph: {
-    title: "AutomateIQ — AI Automation Consulting",
-    description: "Turn hours of manual work into minutes with AI-powered automation.",
+    title: "Random Creation — AI Automation Studio",
+    description: "Describe your biggest manual bottleneck. Our AI maps your automation roadmap in seconds.",
     type: "website",
   },
 };

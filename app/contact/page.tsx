@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact — AutomateIQ",
-  description: "Book a free 30-minute automation audit with AutomateIQ. Tell us your biggest bottleneck and we'll show you what's possible.",
+  title: "Contact — Random Creation",
+  description: "Book a free 30-minute automation audit with Random Creation. Tell us your biggest bottleneck and we'll show you what's possible.",
 };
 
 const benefits = [
