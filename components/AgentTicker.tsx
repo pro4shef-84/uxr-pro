@@ -12,22 +12,20 @@ const LOGS = [
 ];
 
 export default function AgentTicker() {
-  // Duplicate for seamless loop
   const items = [...LOGS, ...LOGS];
 
   return (
-    <div className="bg-slate-950 border-y border-slate-800 py-3 overflow-hidden relative">
-      {/* Fade masks */}
-      <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-slate-950 to-transparent z-10 pointer-events-none" />
-      <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-slate-950 to-transparent z-10 pointer-events-none" />
+    <div className="overflow-hidden relative py-3" style={{ background: "var(--surface)", borderTop: "1px solid var(--border)", borderBottom: "1px solid var(--border)" }}>
+      <div className="absolute inset-y-0 left-0 w-16 pointer-events-none z-10" style={{ background: "linear-gradient(to right, var(--surface), transparent)" }} />
+      <div className="absolute inset-y-0 right-0 w-16 pointer-events-none z-10" style={{ background: "linear-gradient(to left, var(--surface), transparent)" }} />
 
       <div className="flex animate-marquee whitespace-nowrap gap-12">
         {items.map((log, i) => (
           <span key={i} className="inline-flex items-center gap-3 font-mono text-xs shrink-0">
-            <span className="text-slate-600">[{log.time}]</span>
-            <span className="text-slate-500">↳ {log.agent}</span>
-            <span className="text-emerald-400">· {log.action}</span>
-            <span className="text-slate-400">· {log.result}</span>
+            <span style={{ color: "var(--text-dim)" }}>[{log.time}]</span>
+            <span style={{ color: "var(--text-muted)" }}>↳ {log.agent}</span>
+            <span style={{ color: "var(--accent)" }}>· {log.action}</span>
+            <span style={{ color: "var(--text-muted)" }}>· {log.result}</span>
           </span>
         ))}
       </div>

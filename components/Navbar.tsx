@@ -94,7 +94,7 @@ export default function Navbar() {
               href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-accent !py-2.5 !px-5 !text-sm text-center"
+              className="btn-accent !py-2 !px-5 !text-sm text-center"
               onClick={() => setOpen(false)}
             >
               Book a Free Audit

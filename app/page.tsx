@@ -60,7 +60,7 @@ export default function Home() {
         {/* Pills row */}
         <div className="animate-fade-up flex flex-wrap items-center justify-center gap-3 mb-8">
           <span className="pill text-white/60">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse inline-block" style={{ background: "var(--accent)" }} />
             We build automation that runs while you sleep
           </span>
           <AgentCounter />
@@ -100,7 +100,7 @@ export default function Home() {
 
         {/* Stats row */}
         <div
-          className="animate-fade-up delay-400 glass rounded-2xl px-8 py-5 flex gap-10 flex-wrap justify-center"
+          className="animate-fade-up delay-400 glass rounded-2xl px-6 sm:px-8 py-5 flex gap-6 sm:gap-10 flex-wrap justify-center"
         >
           {stats.map((s) => (
             <div key={s.label} className="text-center">
@@ -179,7 +179,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-auto">
             {/* Large card — spans 2 cols */}
             <FadeIn className="md:col-span-2 md:row-span-2">
-              <div className="bento-card p-8 h-full min-h-[280px] relative group flex flex-col justify-between">
+              <div className="bento-card p-8 h-full md:min-h-[280px] relative group flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-5xl">{bento[0].icon}</span>
@@ -209,7 +209,7 @@ export default function Home() {
 
             {/* Medium card */}
             <FadeIn delay={100}>
-              <div className="bento-card p-6 h-full min-h-[130px] relative">
+              <div className="bento-card p-6 h-full md:min-h-[130px] relative">
                 <div className="flex items-start justify-between mb-3">
                   <span className="text-3xl">{bento[1].icon}</span>
                   <span
@@ -229,7 +229,7 @@ export default function Home() {
             {/* Small cards */}
             {bento.slice(2).map((b, i) => (
               <FadeIn key={b.title} delay={(i + 2) * 100}>
-                <div className="bento-card p-6 h-full min-h-[130px]">
+                <div className="bento-card p-6 h-full md:min-h-[130px]">
                   <span className="text-2xl mb-3 block">{b.icon}</span>
                   <h3 className="font-display font-semibold text-base mb-2" style={{ color: "var(--text)" }}>
                     {b.title}
