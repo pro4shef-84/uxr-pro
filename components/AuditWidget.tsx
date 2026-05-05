@@ -147,13 +147,13 @@ export default function AuditWidget() {
       {phase === "email-gate" && (
         <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-xl text-center">
           <p className="text-xs font-bold text-indigo-300 uppercase tracking-widest mb-3">
-            🔒 Your audit is ready
+            ✦ Your automation audit is ready
           </p>
           <h2 className="text-xl font-bold text-white mb-1">
             Where should we send your results?
           </h2>
           <p className="text-sm text-white/60 mb-6">
-            We&apos;ll also send you a custom automation playbook for your industry.
+            Plus: the 5 highest-ROI automations for your industry — built from 50+ client engagements.
           </p>
 
           <form onSubmit={handleEmailSubmit} className="space-y-3">

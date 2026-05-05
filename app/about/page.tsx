@@ -29,9 +29,9 @@ export default function About() {
   return (
     <>
       <section className="bg-gradient-to-b from-brand-50 to-white py-20 text-center px-4">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">About Random Creation</h1>
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Built by operators, not agencies.</h1>
         <p className="text-gray-500 max-w-xl mx-auto text-lg">
-          We&apos;re a small, senior team obsessed with one thing: making your business run without you having to babysit it.
+          We&apos;ve been inside the messy systems, the manual workarounds, the Friday afternoon reports. We build automation that actually gets used.
         </p>
       </section>
 
@@ -39,9 +39,9 @@ export default function About() {
       <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-20">
         <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed space-y-5">
           <p>
-            Random Creation was founded after watching talented teams burn hundreds of hours a month on work
-            that software could — and should — be doing for them. Copy-pasting between systems. Manually
-            following up on leads. Building reports by hand every Friday.
+            We built Random Creation after watching a 12-person ops team spend 3 months manually reconciling
+            data between two systems. One automation fixed it in a day. That gap — between what&apos;s possible
+            and what teams are actually doing — is what we work on.
           </p>
           <p>
             We built this consultancy to fix that. We combine deep process knowledge with hands-on AI

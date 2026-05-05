@@ -43,10 +43,10 @@ export default function Home() {
             AI Automation Studio
           </span>
           <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-4">
-            What&apos;s eating your<br className="hidden sm:block" /> team&apos;s time?
+            Your team is losing 10+ hours<br className="hidden sm:block" /> a week to work AI should be doing.
           </h1>
           <p className="max-w-xl mx-auto text-lg text-indigo-100 mb-10">
-            Describe it below. Our AI maps exactly what to automate — and how — in seconds.
+            Tell us your biggest manual headache. We&apos;ll show you exactly what to automate and what it&apos;s costing you — free, in 60 seconds.
           </p>
 
           <AuditWidget />
@@ -106,10 +106,10 @@ export default function Home() {
       {/* CTA */}
       <section className="max-w-3xl mx-auto px-4 sm:px-6 py-24 text-center">
         <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
-          Ready to stop doing it manually?
+          Stop losing hours to work that shouldn&apos;t require a human.
         </h2>
         <p className="text-gray-500 mb-8">
-          Book a free 30-minute call. We&apos;ll map your biggest bottlenecks and show you exactly what&apos;s possible.
+          In 30 minutes, we&apos;ll identify your top automation opportunities and give you a written roadmap — yours to keep, whether you hire us or not.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a

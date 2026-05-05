@@ -12,7 +12,7 @@ const plans = [
     name: "Workflow Automation Starter",
     price: "$2,500",
     period: "one-time",
-    tagline: "Best for teams with one painful manual process",
+    tagline: "One broken process costing you hours every week. We fix it in 2 weeks, flat.",
     features: [
       "Discovery call to map your workflow",
       "Up to 3 automated workflows",
@@ -27,7 +27,7 @@ const plans = [
     name: "AI Growth Engine",
     price: "$5,500",
     period: "one-time + $500/mo retainer",
-    tagline: "Best for revenue teams ready to scale with AI",
+    tagline: "Your team is dropping leads, losing renewals, or doing manual follow-up. This fixes that.",
     features: [
       "Everything in Starter",
       "Custom AI agent (lead qualification, follow-up, or proposals)",
@@ -43,7 +43,7 @@ const plans = [
     name: "Enterprise AI Transformation",
     price: "Custom",
     period: "scoped engagement",
-    tagline: "Best for ops-heavy teams with complex multi-system workflows",
+    tagline: "Complex ops, multiple systems, no time to fix it. We go deep and stay until it runs itself.",
     features: [
       "Full workflow & systems audit",
       "Unlimited automation workflows",

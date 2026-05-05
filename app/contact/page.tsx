@@ -7,9 +7,9 @@ export const metadata: Metadata = {
 };
 
 const benefits = [
-  "30-minute call, no sales pitch",
-  "We map your top 3 automation opportunities",
-  "You leave with a clear action plan — whether you hire us or not",
+  "30 minutes. You talk, we listen — zero deck, zero pitch.",
+  "We map your top 3 automation opportunities with estimated time savings.",
+  "You leave with a written roadmap — yours to keep, whether you hire us or not.",
 ];
 
 export default function Contact() {
@@ -18,7 +18,7 @@ export default function Contact() {
       <section className="bg-gradient-to-b from-brand-50 to-white py-20 text-center px-4">
         <h1 className="text-4xl md:text-5xl font-extrabold mb-4">Book a Free Audit</h1>
         <p className="text-gray-500 max-w-xl mx-auto text-lg">
-          Tell us what&apos;s eating your team&apos;s time. We&apos;ll show you exactly what AI can fix — for free.
+          In 30 minutes, we&apos;ll identify your top automation opportunities and give you a written roadmap — yours to keep, whether you hire us or not.
         </p>
       </section>
 
