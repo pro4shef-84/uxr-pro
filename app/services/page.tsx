@@ -83,12 +83,12 @@ export default function Services() {
         {plans.map((p, i) => (
           <FadeIn key={p.name} delay={i * 100}>
             <div
-              className="bento-card p-8 flex flex-col h-full relative"
+              className="bento-card p-8 flex flex-col h-full"
               style={p.accent ? { borderColor: "var(--accent)", boxShadow: "0 0 40px var(--glow-accent)" } : {}}
             >
               {p.accent && (
                 <span
-                  className="absolute -top-3 left-1/2 -translate-x-1/2 pill text-xs"
+                  className="pill text-xs mb-4 self-start"
                   style={{ color: "#09090b", background: "var(--accent)", borderColor: "transparent", fontWeight: 700 }}
                 >
                   MOST POPULAR
