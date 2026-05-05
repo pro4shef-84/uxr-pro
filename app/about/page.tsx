@@ -16,7 +16,7 @@ const values = [
 export default function About() {
   return (
     <>
-      <section className="mesh-hero pt-36 pb-20 px-4">
+      <section className="mesh-hero pt-24 pb-20 px-4">
         <div className="max-w-3xl mx-auto">
           <FadeIn>
             <span className="pill mb-6 inline-flex" style={{ color: "var(--text-muted)" }}>Our story</span>

@@ -23,7 +23,7 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 inset-x-0 z-50 flex justify-center transition-all duration-300 ${
-          scrolled ? "pt-3" : "pt-5"
+          scrolled ? "pt-2" : "pt-3"
         }`}
       >
         <div

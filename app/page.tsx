@@ -60,7 +60,7 @@ export default function Home() {
   return (
     <>
       {/* ── HERO ── */}
-      <section className="mesh-hero relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-28 pb-20 overflow-hidden">
+      <section className="mesh-hero relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-20 pb-20 overflow-hidden">
         {/* Ambient glow orbs */}
         <div
           className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full pointer-events-none"

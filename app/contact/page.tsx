@@ -16,7 +16,7 @@ const benefits = [
 export default function Contact() {
   return (
     <>
-      <section className="mesh-hero pt-36 pb-16 text-center px-4">
+      <section className="mesh-hero pt-24 pb-16 text-center px-4">
         <FadeIn>
           <span className="pill mb-4 inline-flex" style={{ color: "var(--text-muted)" }}>Free audit</span>
           <h1

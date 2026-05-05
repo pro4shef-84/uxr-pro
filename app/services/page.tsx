@@ -68,7 +68,7 @@ export default function Services() {
   return (
     <>
       {/* Header */}
-      <section className="mesh-hero pt-36 pb-20 text-center px-4">
+      <section className="mesh-hero pt-24 pb-20 text-center px-4">
         <FadeIn>
           <span className="pill mb-4 inline-flex" style={{ color: "var(--text-muted)" }}>
             Pricing
