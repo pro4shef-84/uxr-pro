@@ -41,20 +41,6 @@ const stats = [
   { value: "50+", label: "client automations shipped" },
 ];
 
-const testimonials = [
-  {
-    quote: "Random Creation cut our client onboarding from 3 days to 4 hours. ROI was visible in week one.",
-    name: "Sarah K.",
-    role: "COO, Regional Mortgage Lender",
-    initial: "S",
-  },
-  {
-    quote: "We went from chasing leads manually to having an AI agent follow up within 5 minutes. Pipeline grew 60%.",
-    name: "Marcus T.",
-    role: "VP Sales, SaaS Startup",
-    initial: "M",
-  },
-];
 
 export default function Home() {
   return (
@@ -262,50 +248,6 @@ export default function Home() {
               View all services & pricing →
             </Link>
           </FadeIn>
-        </div>
-      </section>
-
-      {/* ── TESTIMONIALS ── */}
-      <section className="py-24 px-4" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="max-w-6xl mx-auto">
-          <FadeIn>
-            <h2
-              className="font-display font-bold text-3xl md:text-4xl mb-12 text-center"
-              style={{ color: "var(--text)" }}
-            >
-              What clients say
-            </h2>
-          </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {testimonials.map((t, i) => (
-              <FadeIn key={t.name} delay={i * 100}>
-                <div className="bento-card p-8">
-                  <p
-                    className="text-base leading-relaxed mb-8 italic"
-                    style={{ color: "var(--text-muted)" }}
-                  >
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold font-display flex-shrink-0"
-                      style={{ background: "var(--brand-dim)", color: "var(--brand)" }}
-                    >
-                      {t.initial}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm" style={{ color: "var(--text)" }}>
-                        {t.name}
-                      </p>
-                      <p className="text-xs" style={{ color: "var(--text-muted)" }}>
-                        {t.role}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
         </div>
       </section>
 

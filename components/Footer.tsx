@@ -47,7 +47,7 @@ export default function Footer() {
             Contact
           </p>
           <ul className="space-y-2.5 text-sm" style={{ color: "var(--text-muted)" }}>
-            <li>hello@randomcreation.io</li>
+            <li>randomcrtns@gmail.com</li>
             <li>Denver, CO</li>
           </ul>
           <a

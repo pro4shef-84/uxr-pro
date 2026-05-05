@@ -77,11 +77,11 @@ export default function Contact() {
             >
               <p className="text-xs font-semibold mb-1" style={{ color: "var(--text-muted)" }}>Prefer email?</p>
               <a
-                href="mailto:hello@randomcreation.io"
+                href="mailto:randomcrtns@gmail.com"
                 className="text-sm font-medium transition-colors"
                 style={{ color: "var(--brand)" }}
               >
-                hello@randomcreation.io
+                randomcrtns@gmail.com
               </a>
             </div>
           </div>
