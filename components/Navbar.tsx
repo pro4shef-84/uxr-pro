@@ -33,12 +33,14 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
+          <a
+            href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
+            target="_blank"
+            rel="noopener noreferrer"
             className="ml-4 px-5 py-2 bg-brand-600 text-white text-sm font-semibold rounded-lg hover:bg-brand-700 transition-colors"
           >
-            Get a Free Audit
-          </Link>
+            Book a Free Audit
+          </a>
         </nav>
 
         {/* Mobile hamburger */}
@@ -69,13 +71,15 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Link
-            href="/contact"
+          <a
+            href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
+            target="_blank"
+            rel="noopener noreferrer"
             className="w-full text-center px-5 py-2 bg-brand-600 text-white text-sm font-semibold rounded-lg hover:bg-brand-700 transition-colors"
             onClick={() => setOpen(false)}
           >
-            Get a Free Audit
-          </Link>
+            Book a Free Audit
+          </a>
         </div>
       )}
     </header>

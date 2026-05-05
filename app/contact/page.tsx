@@ -37,12 +37,19 @@ export default function Contact() {
             ))}
           </ul>
 
-          <div className="mt-8 p-6 bg-brand-50 rounded-2xl border border-brand-100">
-            <p className="text-sm font-semibold text-brand-700 mb-1">Typical response time</p>
-            <p className="text-gray-600 text-sm">
-              We reply within one business day to schedule your audit.
-            </p>
-          </div>
+          <a
+            href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-2 flex items-center gap-4 p-6 bg-brand-600 rounded-2xl text-white hover:bg-brand-700 transition-colors group"
+          >
+            <span className="text-3xl">📅</span>
+            <div>
+              <p className="font-bold text-base">Book directly on my calendar</p>
+              <p className="text-indigo-200 text-sm mt-0.5">Pick a time that works — no back-and-forth</p>
+            </div>
+            <span className="ml-auto text-indigo-300 group-hover:translate-x-1 transition-transform">→</span>
+          </a>
 
           <div className="p-6 bg-gray-50 rounded-2xl border border-gray-100">
             <p className="text-sm font-semibold text-gray-700 mb-1">Prefer email?</p>

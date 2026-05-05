@@ -57,12 +57,14 @@ export default function Home() {
             without disrupting how you already work.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/contact"
+            <a
+              href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-8 py-3.5 bg-white text-brand-700 font-bold rounded-xl hover:bg-brand-50 transition-colors shadow-lg"
             >
-              Get a Free Automation Audit →
-            </Link>
+              📅 Book a Free Audit →
+            </a>
             <Link
               href="/services"
               className="px-8 py-3.5 border border-white/30 text-white font-semibold rounded-xl hover:bg-white/10 transition-colors"
@@ -139,12 +141,22 @@ export default function Home() {
         <p className="text-gray-500 mb-8">
           Book a free 30-minute automation audit. We&apos;ll map your biggest bottlenecks and show you exactly what&apos;s possible.
         </p>
-        <Link
-          href="/contact"
-          className="inline-block px-10 py-4 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700 transition-colors shadow-lg text-lg"
-        >
-          Book Your Free Audit →
-        </Link>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block px-10 py-4 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700 transition-colors shadow-lg text-lg"
+          >
+            📅 Book Your Free Audit →
+          </a>
+          <Link
+            href="/contact"
+            className="inline-block px-10 py-4 border border-brand-600 text-brand-600 font-bold rounded-xl hover:bg-brand-50 transition-colors text-lg"
+          >
+            Send a Message
+          </Link>
+        </div>
       </section>
     </>
   );
