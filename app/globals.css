@@ -2,12 +2,209 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-html {
-  scroll-behavior: smooth;
+/* ── Design Tokens ── */
+:root {
+  --bg:          #09090b;
+  --surface:     #111113;
+  --surface-2:   #1c1c1f;
+  --border:      rgba(255, 255, 255, 0.07);
+  --border-2:    rgba(255, 255, 255, 0.12);
+  --text:        #fafafa;
+  --text-muted:  #71717a;
+  --text-dim:    #3f3f46;
+  --accent:      #b9ff66;
+  --accent-dim:  rgba(185, 255, 102, 0.12);
+  --brand:       #6366f1;
+  --brand-dim:   rgba(99, 102, 241, 0.15);
+  --glow-brand:  rgba(99, 102, 241, 0.4);
+  --glow-accent: rgba(185, 255, 102, 0.3);
 }
+
+/* ── Base ── */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
-  font-family: Inter, system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* ── Noise texture overlay ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* ── Typography ── */
+.font-display { font-family: var(--font-display), sans-serif; }
+
+/* ── Gradient Mesh ── */
+.mesh-hero {
+  background:
+    radial-gradient(ellipse 70% 60% at 15% 30%, rgba(99, 102, 241, 0.28) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 85% 70%, rgba(185, 255, 102, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(30, 27, 75, 0.5) 0%, transparent 80%),
+    var(--bg);
+}
+
+.mesh-section {
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(99, 102, 241, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(185, 255, 102, 0.05) 0%, transparent 60%),
+    var(--bg);
+}
+
+/* ── Glass ── */
+.glass {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-2);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-2);
+}
+
+/* ── Glow ── */
+.glow-brand {
+  box-shadow: 0 0 40px var(--glow-brand), 0 0 80px rgba(99, 102, 241, 0.15);
+}
+.glow-accent {
+  box-shadow: 0 0 30px var(--glow-accent);
+}
+
+/* ── Pill badge ── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1px solid var(--border-2);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ── Accent button ── */
+.btn-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #09090b;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  cursor: pointer;
+}
+.btn-accent:hover {
+  background: #c8ff7a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px var(--glow-accent);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 15px;
+  border-radius: 14px;
+  border: 1px solid var(--border-2);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+.btn-ghost:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-1px);
+}
+
+/* ── Scroll reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Bento card ── */
+.bento-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+.bento-card:hover {
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+/* ── Keyframes ── */
+@keyframes marquee {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.animate-marquee  { animation: marquee 28s linear infinite; }
+.animate-fade-up  { animation: fade-up 0.6s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-fade-in  { animation: fade-in 0.6s ease both; }
+.animate-float    { animation: float 4s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 12s linear infinite; }
+
+/* ── Stagger delays ── */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }

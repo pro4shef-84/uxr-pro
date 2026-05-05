@@ -2,67 +2,47 @@
 
 import { useState, useRef } from "react";
 
-interface Automation {
-  title: string;
-  description: string;
-  tool: string;
-}
-
-interface AuditResult {
-  pain: string;
-  time_saved: string;
-  automations: Automation[];
-  quick_win: string;
-}
-
-type Phase = "input" | "email-gate" | "results" | "error";
+interface Automation { title: string; description: string; tool: string }
+interface AuditResult { pain: string; time_saved: string; automations: Automation[]; quick_win: string }
+type Phase = "input" | "email-gate" | "results";
 
 const EXAMPLES = [
-  "We manually copy data from email inquiries into our CRM every morning",
-  "My team builds reports from 5 spreadsheets every Friday — takes 3 hours",
-  "We chase unpaid invoices by hand every week",
+  "We copy data from email inquiries into our CRM every morning",
+  "Team builds reports from 5 spreadsheets every Friday — 3 hours",
+  "We chase unpaid invoices manually every week",
 ];
 
 export default function AuditWidget() {
-  const [problem, setProblem] = useState("");
-  const [email, setEmail] = useState("");
-  const [phase, setPhase] = useState<Phase>("input");
-  const [result, setResult] = useState<AuditResult | null>(null);
+  const [problem, setProblem]       = useState("");
+  const [email, setEmail]           = useState("");
+  const [phase, setPhase]           = useState<Phase>("input");
+  const [result, setResult]         = useState<AuditResult | null>(null);
   const [emailSending, setEmailSending] = useState(false);
-  const [error, setError] = useState("");
 
-  // Stream runs in background while email gate is shown
   const streamResultRef = useRef<AuditResult | null>(null);
-  const streamDoneRef = useRef(false);
+  const streamDoneRef   = useRef(false);
 
   const startStream = async (input: string) => {
     streamResultRef.current = null;
     streamDoneRef.current = false;
     let buffer = "";
-
     try {
       const res = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ problem: input }),
       });
-      if (!res.ok) throw new Error("AI unavailable");
+      if (!res.ok) throw new Error();
       const reader = res.body!.getReader();
-      const decoder = new TextDecoder();
+      const dec = new TextDecoder();
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
-        buffer += decoder.decode(value, { stream: true });
-        try {
-          streamResultRef.current = JSON.parse(buffer);
-        } catch {
-          // still buffering
-        }
+        buffer += dec.decode(value, { stream: true });
+        try { streamResultRef.current = JSON.parse(buffer); } catch { /* buffering */ }
       }
-      streamDoneRef.current = true;
-    } catch {
-      streamDoneRef.current = true; // unblock email submit even on error
-    }
+    } catch { /* handled below */ }
+    streamDoneRef.current = true;
   };
 
   const handleAnalyze = (input?: string) => {
@@ -70,35 +50,24 @@ export default function AuditWidget() {
     if (!text.trim()) return;
     if (input) setProblem(input);
     setPhase("email-gate");
-    setError("");
-    // Fire and forget — stream in background
     startStream(text);
   };
 
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email.trim()) return;
     setEmailSending(true);
-
-    // Wait for stream to finish (max 15s)
     const start = Date.now();
     while (!streamDoneRef.current && Date.now() - start < 15000) {
       await new Promise((r) => setTimeout(r, 200));
     }
-
     const auditResult = streamResultRef.current;
-
-    // Capture email + send results via Resend
     try {
       await fetch("/api/capture", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, problem, result: auditResult }),
       });
-    } catch {
-      // non-blocking — still show results even if email fails
-    }
-
+    } catch { /* non-blocking */ }
     setResult(auditResult);
     setEmailSending(false);
     setPhase("results");
@@ -106,53 +75,66 @@ export default function AuditWidget() {
 
   return (
     <div className="w-full max-w-3xl mx-auto">
-      {/* ── Step 1: Input ── */}
+
+      {/* ── Input ── */}
       {phase === "input" && (
-        <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20">
-          <p className="text-indigo-200 text-sm font-medium mb-3">
-            Describe your biggest manual bottleneck ↓
+        <div className="glass-strong rounded-3xl p-6">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>
+            Describe your bottleneck ↓
           </p>
           <textarea
             rows={3}
             value={problem}
             onChange={(e) => setProblem(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) handleAnalyze();
-            }}
+            onKeyDown={(e) => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) handleAnalyze(); }}
             placeholder="e.g. We manually copy customer data from emails into our CRM every morning…"
-            className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-indigo-300 text-sm resize-none focus:outline-none focus:ring-2 focus:ring-white/30"
+            className="w-full rounded-xl px-4 py-3 text-sm resize-none focus:outline-none focus:ring-2 placeholder-opacity-40"
+            style={{
+              background: "rgba(255,255,255,0.04)",
+              border: "1px solid var(--border-2)",
+              color: "var(--text)",
+              caretColor: "var(--accent)",
+            }}
           />
           <div className="flex flex-wrap gap-2 mt-3 mb-4">
             {EXAMPLES.map((ex) => (
               <button
                 key={ex}
                 onClick={() => handleAnalyze(ex)}
-                className="text-xs px-3 py-1.5 rounded-full bg-white/10 text-indigo-200 hover:bg-white/20 transition-colors text-left"
+                className="text-xs px-3 py-1.5 rounded-full transition-colors text-left"
+                style={{
+                  background: "rgba(255,255,255,0.06)",
+                  border: "1px solid var(--border)",
+                  color: "var(--text-muted)",
+                }}
               >
-                {ex.length > 50 ? ex.slice(0, 50) + "…" : ex}
+                {ex.length > 52 ? ex.slice(0, 52) + "…" : ex}
               </button>
             ))}
           </div>
           <button
             onClick={() => handleAnalyze()}
             disabled={!problem.trim()}
-            className="w-full py-3 bg-white text-brand-700 font-bold rounded-xl hover:bg-brand-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="btn-accent w-full justify-center disabled:opacity-40 disabled:cursor-not-allowed"
           >
             Analyze My Workflow →
           </button>
         </div>
       )}
 
-      {/* ── Step 2: Email gate (streams in background) ── */}
+      {/* ── Email gate ── */}
       {phase === "email-gate" && (
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-xl text-center">
-          <p className="text-xs font-bold text-indigo-300 uppercase tracking-widest mb-3">
+        <div className="glass-strong rounded-3xl p-8 text-center">
+          <span
+            className="pill mb-4 inline-flex"
+            style={{ color: "var(--accent)", borderColor: "var(--accent-dim)", background: "var(--accent-dim)" }}
+          >
             ✦ Your automation audit is ready
-          </p>
-          <h2 className="text-xl font-bold text-white mb-1">
+          </span>
+          <h2 className="font-display font-bold text-xl mt-2 mb-1" style={{ color: "var(--text)" }}>
             Where should we send your results?
           </h2>
-          <p className="text-sm text-white/60 mb-6">
+          <p className="text-sm mb-6" style={{ color: "var(--text-muted)" }}>
             Plus: the 5 highest-ROI automations for your industry — built from 50+ client engagements.
           </p>
 
@@ -164,85 +146,103 @@ export default function AuditWidget() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
-              className="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/40 text-sm focus:outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400"
+              className="w-full rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2"
+              style={{
+                background: "rgba(255,255,255,0.05)",
+                border: "1px solid var(--border-2)",
+                color: "var(--text)",
+                caretColor: "var(--accent)",
+              }}
             />
             <button
               type="submit"
               disabled={emailSending || !email.trim()}
-              className="w-full py-3 bg-indigo-500 hover:bg-indigo-400 text-white font-bold rounded-xl transition-colors disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="btn-accent w-full justify-center disabled:opacity-50"
             >
               {emailSending ? (
-                <>
+                <span className="flex items-center justify-center gap-2">
                   <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
                   </svg>
                   Preparing your audit…
-                </>
-              ) : (
-                "Get My Free Audit →"
-              )}
+                </span>
+              ) : "Get My Free Audit →"}
             </button>
           </form>
 
-          <p className="text-xs text-white/40 mt-4">No spam. Unsubscribe anytime.</p>
+          <p className="text-xs mt-4" style={{ color: "var(--text-dim)" }}>No spam. Unsubscribe anytime.</p>
 
-          <div className="mt-6 flex gap-2 justify-center">
+          {/* Streaming progress dots */}
+          <div className="mt-6 flex justify-center gap-2">
             {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className="h-1.5 w-8 rounded-full bg-white/20 overflow-hidden"
-              >
+              <div key={i} className="h-1 w-8 rounded-full overflow-hidden" style={{ background: "var(--border-2)" }}>
                 <div
-                  className="h-full bg-indigo-400 rounded-full animate-pulse"
-                  style={{ animationDelay: `${i * 200}ms` }}
+                  className="h-full rounded-full animate-pulse"
+                  style={{ background: "var(--accent)", opacity: 0.6, animationDelay: `${i * 200}ms` }}
                 />
               </div>
             ))}
           </div>
-          <p className="text-xs text-white/40 mt-2">Claude is analyzing your workflow…</p>
+          <p className="text-xs mt-2" style={{ color: "var(--text-dim)" }}>Claude is analyzing your workflow…</p>
         </div>
       )}
 
-      {/* ── Step 3: Results ── */}
+      {/* ── Results ── */}
       {phase === "results" && result && (
         <div className="space-y-4">
-          {/* Header */}
-          <div className="bg-white rounded-2xl p-6 shadow-xl">
-            <div className="flex items-start justify-between gap-4 flex-wrap">
-              <div>
-                <p className="text-xs font-semibold text-brand-600 uppercase tracking-wide mb-1">
-                  AI Diagnosis
-                </p>
-                <p className="text-gray-800 font-medium">{result.pain}</p>
-              </div>
-              <div className="text-center bg-brand-50 rounded-xl px-5 py-3 flex-shrink-0">
-                <p className="text-2xl font-extrabold text-brand-600">{result.time_saved}</p>
-                <p className="text-xs text-gray-500 mt-0.5">estimated savings</p>
-              </div>
+          {/* Header card */}
+          <div className="bento-card p-6 flex items-start justify-between gap-4 flex-wrap">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: "var(--brand)" }}>
+                AI Diagnosis
+              </p>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>{result.pain}</p>
+            </div>
+            <div
+              className="text-center rounded-xl px-5 py-3 flex-shrink-0"
+              style={{ background: "var(--accent-dim)", border: "1px solid rgba(185,255,102,0.2)" }}
+            >
+              <p className="font-display font-extrabold text-2xl" style={{ color: "var(--accent)" }}>
+                {result.time_saved}
+              </p>
+              <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>saved/week</p>
             </div>
           </div>
 
-          {/* 3 automations */}
+          {/* 3 automation cards */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {result.automations.map((a, i) => {
-              const hrs = String(2 + i).padStart(2, "0");
-              const mins = String(Math.floor(Math.random() * 59)).padStart(2, "0");
+              const hrs  = String(2 + i).padStart(2, "0");
+              const mins = String((i * 17 + 11) % 60).padStart(2, "0");
               return (
                 <div
                   key={i}
-                  className="bg-white rounded-2xl p-5 shadow-xl border-l-2 border-indigo-400"
-                  style={{ animation: `fade-up 0.4s ease-out ${i * 0.15}s both` }}
+                  className="bento-card p-5"
+                  style={{
+                    borderLeft: "2px solid var(--accent)",
+                    animation: `fade-up 0.4s ease-out ${i * 0.15}s both`,
+                  }}
                 >
-                  <p className="font-mono text-xs text-slate-400 mb-2">
-                    ↳ run completed · 0{hrs}:{mins} AM · 0.{3 + i}s
+                  <p className="font-mono text-xs mb-2" style={{ color: "var(--text-dim)" }}>
+                    ↳ run complete · 0{hrs}:{mins} AM
                   </p>
-                  <span className="inline-block text-xs font-bold text-brand-600 bg-brand-50 rounded-full px-2 py-0.5 mb-3">
+                  <span
+                    className="pill text-xs mb-3 inline-flex"
+                    style={{ color: "var(--accent)", background: "var(--accent-dim)", borderColor: "transparent" }}
+                  >
                     #{i + 1}
                   </span>
-                  <h3 className="font-bold text-gray-900 mb-2 leading-snug">{a.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-3">{a.description}</p>
-                  <span className="text-xs bg-gray-100 text-gray-600 rounded-full px-3 py-1 font-medium">
+                  <h3 className="font-display font-semibold text-sm mb-2" style={{ color: "var(--text)" }}>
+                    {a.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed mb-3" style={{ color: "var(--text-muted)" }}>
+                    {a.description}
+                  </p>
+                  <span
+                    className="pill text-xs"
+                    style={{ color: "var(--text-muted)", fontSize: "10px" }}
+                  >
                     {a.tool}
                   </span>
                 </div>
@@ -251,27 +251,30 @@ export default function AuditWidget() {
           </div>
 
           {/* Quick win */}
-          <div className="bg-yellow-50 border border-yellow-200 rounded-2xl p-5 flex gap-3 items-start shadow-xl">
+          <div
+            className="bento-card p-5 flex gap-3 items-start"
+            style={{ borderLeft: "2px solid #f59e0b" }}
+          >
             <span className="text-2xl flex-shrink-0">⚡</span>
             <div>
-              <p className="font-bold text-yellow-800 text-sm mb-1">Quick win this week</p>
-              <p className="text-yellow-700 text-sm leading-relaxed">{result.quick_win}</p>
+              <p className="font-semibold text-sm mb-1" style={{ color: "#fbbf24" }}>Quick win this week</p>
+              <p className="text-xs leading-relaxed" style={{ color: "var(--text-muted)" }}>{result.quick_win}</p>
             </div>
           </div>
 
-          {/* Email capture success + CTA */}
-          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-center">
-            <p className="text-white font-semibold mb-1">
-              ✅ Results sent to <span className="text-indigo-300">{email}</span>
+          {/* Email confirm + CTA */}
+          <div className="glass-strong rounded-3xl p-6 text-center">
+            <p className="text-sm mb-1" style={{ color: "var(--text)" }}>
+              ✅ Results sent to <span style={{ color: "var(--accent)" }}>{email}</span>
             </p>
-            <p className="text-white/60 text-sm mb-5">
+            <p className="text-xs mb-5" style={{ color: "var(--text-muted)" }}>
               Check your inbox for the full automation playbook.
             </p>
             <a
               href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-3 bg-white text-brand-700 font-bold rounded-xl hover:bg-brand-50 transition-colors shadow-lg"
+              className="btn-accent inline-flex"
             >
               📅 Book a free call to implement this →
             </a>
@@ -279,26 +282,22 @@ export default function AuditWidget() {
         </div>
       )}
 
-      {/* ── No results fallback ── */}
+      {/* Fallback */}
       {phase === "results" && !result && (
-        <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 text-center">
-          <p className="text-white font-semibold mb-2">We&apos;ve got your details!</p>
-          <p className="text-white/60 text-sm mb-5">
-            Something went sideways with the AI — check your inbox, we&apos;ll follow up personally.
+        <div className="glass-strong rounded-3xl p-8 text-center">
+          <p className="font-semibold mb-2" style={{ color: "var(--text)" }}>We&apos;ve got your details!</p>
+          <p className="text-sm mb-5" style={{ color: "var(--text-muted)" }}>
+            Something went sideways — we&apos;ll follow up personally.
           </p>
           <a
             href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3 bg-white text-brand-700 font-bold rounded-xl hover:bg-brand-50 transition-colors"
+            className="btn-accent inline-flex"
           >
             📅 Book a free call →
           </a>
         </div>
-      )}
-
-      {error && (
-        <p className="mt-3 text-red-300 text-sm text-center">{error}</p>
       )}
     </div>
   );

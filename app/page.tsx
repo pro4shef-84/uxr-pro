@@ -2,138 +2,352 @@ import Link from "next/link";
 import AuditWidget from "@/components/AuditWidget";
 import AgentTicker from "@/components/AgentTicker";
 import AgentCounter from "@/components/AgentCounter";
+import FadeIn from "@/components/FadeIn";
 
-const services = [
+const bento = [
   {
+    size: "large",
     icon: "⚙️",
     title: "Workflow Automation",
-    desc: "Eliminate repetitive tasks across your CRM, spreadsheets, email, and 500+ apps — no code required.",
+    desc: "Connect your CRM, inbox, spreadsheets, and 500+ apps into self-running pipelines. No code, no maintenance.",
+    tag: "Most deployed",
   },
   {
+    size: "medium",
     icon: "🤖",
     title: "AI Agents",
-    desc: "Deploy custom AI agents that qualify leads, draft proposals, and answer customer questions 24/7.",
+    desc: "Custom agents that qualify leads, draft proposals, and handle follow-up 24/7 — trained on your business.",
+    tag: "Highest ROI",
   },
   {
+    size: "small",
     icon: "🔗",
     title: "Systems Integration",
-    desc: "Connect siloed tools so data flows automatically — from intake to invoice without manual entry.",
+    desc: "Siloed tools, connected. Data flows from intake to invoice without a human in the loop.",
+    tag: null,
   },
+  {
+    size: "small",
+    icon: "📊",
+    title: "Reporting Automation",
+    desc: "Your Friday afternoon report, built and sent automatically every week.",
+    tag: null,
+  },
+];
+
+const stats = [
+  { value: "10+", label: "hrs saved per week" },
+  { value: "2 wks", label: "avg deployment time" },
+  { value: "50+", label: "client automations shipped" },
 ];
 
 const testimonials = [
   {
-    quote: "Random Creation cut our client onboarding from 3 days to 4 hours. The ROI was visible in week one.",
+    quote: "Random Creation cut our client onboarding from 3 days to 4 hours. ROI was visible in week one.",
     name: "Sarah K.",
     role: "COO, Regional Mortgage Lender",
+    initial: "S",
   },
   {
     quote: "We went from chasing leads manually to having an AI agent follow up within 5 minutes. Pipeline grew 60%.",
     name: "Marcus T.",
     role: "VP Sales, SaaS Startup",
+    initial: "M",
   },
 ];
 
 export default function Home() {
   return (
     <>
-      {/* Hero with embedded AI widget */}
-      <section className="relative bg-gradient-to-br from-brand-900 via-brand-700 to-indigo-500 text-white overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-white via-transparent to-transparent" />
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 py-20 md:py-28 text-center">
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
-            <span className="px-4 py-1 bg-white/10 rounded-full text-sm font-medium tracking-wide">
-              AI Automation Studio
-            </span>
-            <AgentCounter />
-          </div>
-          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight mb-4">
-            Your team is losing 10+ hours<br className="hidden sm:block" /> a week to work AI should be doing.
-          </h1>
-          <p className="max-w-xl mx-auto text-lg text-indigo-100 mb-10">
-            Tell us your biggest manual headache. We&apos;ll show you exactly what to automate and what it&apos;s costing you — free, in 60 seconds.
-          </p>
+      {/* ── HERO ── */}
+      <section className="mesh-hero relative min-h-screen flex flex-col items-center justify-center text-center px-4 pt-28 pb-20 overflow-hidden">
+        {/* Ambient glow orbs */}
+        <div
+          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(99,102,241,0.18) 0%, transparent 70%)" }}
+        />
+        <div
+          className="absolute bottom-1/4 right-1/4 w-64 h-64 rounded-full pointer-events-none"
+          style={{ background: "radial-gradient(circle, rgba(185,255,102,0.08) 0%, transparent 70%)" }}
+        />
 
-          <AuditWidget />
-
-          <p className="mt-8 text-indigo-300 text-sm">
-            Powered by Claude AI · Same agent stack used in our client builds
-          </p>
+        {/* Pills row */}
+        <div className="animate-fade-up flex flex-wrap items-center justify-center gap-3 mb-8">
+          <span className="pill text-white/60">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse inline-block" />
+            AI Automation Studio
+          </span>
+          <AgentCounter />
         </div>
-      </section>
 
-      <AgentTicker />
+        {/* Headline */}
+        <h1
+          className="animate-fade-up delay-100 font-display font-extrabold leading-[0.95] tracking-tight mb-6 max-w-4xl"
+          style={{ fontSize: "clamp(2.8rem, 7vw, 6rem)", color: "var(--text)" }}
+        >
+          Your team is losing{" "}
+          <span style={{ color: "var(--accent)" }}>10+ hours</span>
+          {" "}a week to work AI should be doing.
+        </h1>
 
-      {/* Services preview */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-4">What we build</h2>
-        <p className="text-center text-gray-500 mb-12 max-w-xl mx-auto">
-          We don&apos;t sell software — we build custom automation systems tailored to how your business actually runs.
+        <p
+          className="animate-fade-up delay-200 text-lg md:text-xl mb-10 max-w-xl"
+          style={{ color: "var(--text-muted)" }}
+        >
+          Tell us your biggest manual headache. We&apos;ll show you exactly what to automate
+          and what it&apos;s costing you — free, in 60 seconds.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((s) => (
-            <div
-              key={s.title}
-              className="p-8 rounded-2xl border border-gray-100 hover:border-brand-200 hover:shadow-md transition-all"
-            >
-              <p className="text-4xl mb-4">{s.icon}</p>
-              <h3 className="text-xl font-bold mb-2">{s.title}</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
+
+        {/* CTA buttons */}
+        <div className="animate-fade-up delay-300 flex flex-col sm:flex-row gap-4 mb-16">
+          <a
+            href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-accent"
+          >
+            📅 Book a Free Audit
+          </a>
+          <Link href="/services" className="btn-ghost">
+            View pricing →
+          </Link>
+        </div>
+
+        {/* Stats row */}
+        <div
+          className="animate-fade-up delay-400 glass rounded-2xl px-8 py-5 flex gap-10 flex-wrap justify-center"
+        >
+          {stats.map((s) => (
+            <div key={s.label} className="text-center">
+              <p
+                className="font-display font-bold text-2xl"
+                style={{ color: "var(--accent)" }}
+              >
+                {s.value}
+              </p>
+              <p className="text-xs mt-0.5" style={{ color: "var(--text-muted)" }}>
+                {s.label}
+              </p>
             </div>
           ))}
         </div>
-        <div className="text-center mt-10">
-          <Link
-            href="/services"
-            className="inline-block px-6 py-3 border border-brand-600 text-brand-600 font-semibold rounded-lg hover:bg-brand-50 transition-colors"
-          >
-            View services & pricing →
-          </Link>
+
+        {/* Scroll hint */}
+        <div
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-float"
+          style={{ color: "var(--text-dim)" }}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+          </svg>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="bg-gray-50 border-y border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
-          <h2 className="text-3xl font-extrabold text-center mb-12">What clients say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((t) => (
-              <div key={t.name} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-                <p className="text-gray-700 leading-relaxed mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
+      {/* ── TICKER ── */}
+      <AgentTicker />
+
+      {/* ── AI AUDIT ── */}
+      <section className="mesh-section relative py-24 px-4 overflow-hidden">
+        <div className="max-w-3xl mx-auto text-center mb-12">
+          <FadeIn>
+            <span className="pill mb-4 inline-flex" style={{ color: "var(--accent)", borderColor: "var(--accent-dim)" }}>
+              Live AI Analysis
+            </span>
+            <h2
+              className="font-display font-bold text-4xl md:text-5xl mt-4 mb-4"
+              style={{ color: "var(--text)" }}
+            >
+              See your automation roadmap
+              <br />
+              <span style={{ color: "var(--text-muted)" }}>in 60 seconds.</span>
+            </h2>
+            <p className="text-base" style={{ color: "var(--text-muted)" }}>
+              Powered by Claude AI — the same agent stack we deploy for clients.
+            </p>
+          </FadeIn>
+        </div>
+        <FadeIn delay={100}>
+          <AuditWidget />
+        </FadeIn>
+      </section>
+
+      {/* ── BENTO GRID ── */}
+      <section className="py-24 px-4">
+        <div className="max-w-6xl mx-auto">
+          <FadeIn>
+            <div className="mb-14">
+              <span className="pill mb-4 inline-flex" style={{ color: "var(--text-muted)" }}>
+                What we build
+              </span>
+              <h2
+                className="font-display font-bold text-4xl md:text-5xl mt-4 max-w-xl"
+                style={{ color: "var(--text)" }}
+              >
+                Not software.
+                <br />
+                <span style={{ color: "var(--accent)" }}>Systems.</span>
+              </h2>
+            </div>
+          </FadeIn>
+
+          {/* Bento grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-auto">
+            {/* Large card — spans 2 cols */}
+            <FadeIn className="md:col-span-2 md:row-span-2">
+              <div className="bento-card p-8 h-full min-h-[280px] relative group flex flex-col justify-between">
                 <div>
-                  <p className="font-bold text-gray-900">{t.name}</p>
-                  <p className="text-sm text-gray-500">{t.role}</p>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-5xl">{bento[0].icon}</span>
+                    <span
+                      className="pill text-xs"
+                      style={{ color: "var(--accent)", background: "var(--accent-dim)", borderColor: "transparent" }}
+                    >
+                      {bento[0].tag}
+                    </span>
+                  </div>
+                  <h3
+                    className="font-display font-bold text-2xl mb-3"
+                    style={{ color: "var(--text)" }}
+                  >
+                    {bento[0].title}
+                  </h3>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                    {bento[0].desc}
+                  </p>
                 </div>
+                <div
+                  className="mt-6 w-full h-px"
+                  style={{ background: "linear-gradient(90deg, var(--accent) 0%, transparent 100%)" }}
+                />
               </div>
+            </FadeIn>
+
+            {/* Medium card */}
+            <FadeIn delay={100}>
+              <div className="bento-card p-6 h-full min-h-[130px] relative">
+                <div className="flex items-start justify-between mb-3">
+                  <span className="text-3xl">{bento[1].icon}</span>
+                  <span
+                    className="pill text-xs"
+                    style={{ color: "var(--brand)", background: "var(--brand-dim)", borderColor: "transparent" }}
+                  >
+                    {bento[1].tag}
+                  </span>
+                </div>
+                <h3 className="font-display font-bold text-lg mb-2" style={{ color: "var(--text)" }}>
+                  {bento[1].title}
+                </h3>
+                <p className="text-sm" style={{ color: "var(--text-muted)" }}>{bento[1].desc}</p>
+              </div>
+            </FadeIn>
+
+            {/* Small cards */}
+            {bento.slice(2).map((b, i) => (
+              <FadeIn key={b.title} delay={(i + 2) * 100}>
+                <div className="bento-card p-6 h-full min-h-[130px]">
+                  <span className="text-2xl mb-3 block">{b.icon}</span>
+                  <h3 className="font-display font-semibold text-base mb-2" style={{ color: "var(--text)" }}>
+                    {b.title}
+                  </h3>
+                  <p className="text-xs leading-relaxed" style={{ color: "var(--text-muted)" }}>
+                    {b.desc}
+                  </p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+
+          <FadeIn delay={200} className="mt-8 text-center">
+            <Link href="/services" className="btn-ghost inline-flex">
+              View all services & pricing →
+            </Link>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ── TESTIMONIALS ── */}
+      <section className="py-24 px-4" style={{ borderTop: "1px solid var(--border)" }}>
+        <div className="max-w-6xl mx-auto">
+          <FadeIn>
+            <h2
+              className="font-display font-bold text-3xl md:text-4xl mb-12 text-center"
+              style={{ color: "var(--text)" }}
+            >
+              What clients say
+            </h2>
+          </FadeIn>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {testimonials.map((t, i) => (
+              <FadeIn key={t.name} delay={i * 100}>
+                <div className="bento-card p-8">
+                  <p
+                    className="text-base leading-relaxed mb-8 italic"
+                    style={{ color: "var(--text-muted)" }}
+                  >
+                    &ldquo;{t.quote}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold font-display flex-shrink-0"
+                      style={{ background: "var(--brand-dim)", color: "var(--brand)" }}
+                    >
+                      {t.initial}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm" style={{ color: "var(--text)" }}>
+                        {t.name}
+                      </p>
+                      <p className="text-xs" style={{ color: "var(--text-muted)" }}>
+                        {t.role}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="max-w-3xl mx-auto px-4 sm:px-6 py-24 text-center">
-        <h2 className="text-3xl md:text-4xl font-extrabold mb-4">
-          Stop losing hours to work that shouldn&apos;t require a human.
-        </h2>
-        <p className="text-gray-500 mb-8">
-          In 30 minutes, we&apos;ll identify your top automation opportunities and give you a written roadmap — yours to keep, whether you hire us or not.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block px-10 py-4 bg-brand-600 text-white font-bold rounded-xl hover:bg-brand-700 transition-colors shadow-lg text-lg"
+      {/* ── CTA ── */}
+      <section className="mesh-hero relative py-32 px-4 text-center overflow-hidden">
+        <div
+          className="absolute inset-x-0 top-0 h-px"
+          style={{ background: "linear-gradient(90deg, transparent, var(--brand), transparent)" }}
+        />
+        <FadeIn>
+          <span className="pill mb-6 inline-flex" style={{ color: "var(--text-muted)" }}>
+            Ready when you are
+          </span>
+          <h2
+            className="font-display font-extrabold text-4xl md:text-6xl mb-6 leading-tight max-w-3xl mx-auto"
+            style={{ color: "var(--text)" }}
           >
-            📅 Book a Free Audit →
-          </a>
-          <Link
-            href="/contact"
-            className="inline-block px-10 py-4 border border-brand-600 text-brand-600 font-bold rounded-xl hover:bg-brand-50 transition-colors text-lg"
-          >
-            Send a Message
-          </Link>
-        </div>
+            Stop losing hours to work
+            <br />
+            that shouldn&apos;t require a human.
+          </h2>
+          <p className="text-lg mb-10 max-w-lg mx-auto" style={{ color: "var(--text-muted)" }}>
+            In 30 minutes, we&apos;ll map your top automation opportunities and give you a written roadmap — yours to keep.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-accent"
+            >
+              📅 Book a Free Audit
+            </a>
+            <Link href="/contact" className="btn-ghost">
+              Send a message
+            </Link>
+          </div>
+        </FadeIn>
+        <div
+          className="absolute inset-x-0 bottom-0 h-px"
+          style={{ background: "linear-gradient(90deg, transparent, var(--border-2), transparent)" }}
+        />
       </section>
     </>
   );

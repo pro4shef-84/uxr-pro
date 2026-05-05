@@ -2,28 +2,37 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-brand-900 text-gray-300">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
-          <p className="text-white text-xl font-extrabold tracking-tight mb-2">
-            <span className="text-indigo-300">Random</span> Creation
+          <p className="font-display font-bold text-lg mb-3">
+            <span style={{ color: "var(--accent)" }}>Random</span>
+            <span className="text-white"> Creation</span>
           </p>
-          <p className="text-sm text-gray-400 leading-relaxed">
-            AI-powered automation studio. We turn your most painful manual work into intelligent, self-running systems.
+          <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
+            AI automation studio. We deploy agents that run while you sleep, eliminate manual work, and compound over time.
           </p>
         </div>
 
         <div>
-          <p className="text-white font-semibold mb-3">Quick Links</p>
-          <ul className="space-y-2 text-sm">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-dim)" }}>
+            Navigate
+          </p>
+          <ul className="space-y-2.5 text-sm">
             {[
-              { href: "/", label: "Home" },
-              { href: "/services", label: "Services" },
-              { href: "/about", label: "About" },
+              { href: "/",        label: "Home" },
+              { href: "/services",label: "Services" },
+              { href: "/about",   label: "About" },
               { href: "/contact", label: "Contact" },
             ].map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="hover:text-white transition-colors">
+                <Link
+                  href={l.href}
+                  className="transition-colors"
+                  style={{ color: "var(--text-muted)" }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
+                >
                   {l.label}
                 </Link>
               </li>
@@ -32,14 +41,28 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="text-white font-semibold mb-3">Contact</p>
-          <ul className="space-y-2 text-sm">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-dim)" }}>
+            Contact
+          </p>
+          <ul className="space-y-2.5 text-sm" style={{ color: "var(--text-muted)" }}>
             <li>hello@randomcreation.io</li>
             <li>Denver, CO</li>
           </ul>
+          <a
+            href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-accent inline-flex mt-6 !py-2.5 !px-5 !text-sm !rounded-xl"
+          >
+            Book a call
+          </a>
         </div>
       </div>
-      <div className="border-t border-brand-700/50 text-center py-4 text-xs text-gray-500">
+
+      <div
+        className="text-center py-5 text-xs"
+        style={{ borderTop: "1px solid var(--border)", color: "var(--text-dim)" }}
+      >
         © {new Date().getFullYear()} Random Creation. All rights reserved.
       </div>
     </footer>
