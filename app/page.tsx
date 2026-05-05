@@ -61,7 +61,7 @@ export default function Home() {
         <div className="animate-fade-up flex flex-wrap items-center justify-center gap-3 mb-8">
           <span className="pill text-white/60">
             <span className="w-1.5 h-1.5 rounded-full animate-pulse inline-block" style={{ background: "var(--accent)" }} />
-            We build automation that runs while you sleep
+            Do more of what you love
           </span>
           <AgentCounter />
         </div>
@@ -71,16 +71,17 @@ export default function Home() {
           className="animate-fade-up delay-100 font-display font-extrabold leading-[0.95] tracking-tight mb-6 max-w-4xl"
           style={{ fontSize: "clamp(2rem, 4.5vw, 3.75rem)", color: "var(--text)" }}
         >
-          Your team is doing work{" "}
-          <span style={{ color: "var(--accent)" }}>AI should own.</span>
+          Focus on what you&apos;re great at.{" "}
+          <span style={{ color: "var(--accent)" }}>We&apos;ll automate the rest.</span>
         </h1>
 
         <p
           className="animate-fade-up delay-200 text-lg md:text-xl mb-10 max-w-xl"
           style={{ color: "var(--text-muted)" }}
         >
-          Tell us your biggest bottleneck. We&apos;ll show you exactly what to automate
-          and what it&apos;s costing you — free, in 60 seconds.
+          You didn&apos;t start your business to spend your days on repetitive tasks.
+          We take the monotonous work off your plate so you and your team can get back
+          to the work you actually love — and do more of it.
         </p>
 
         {/* CTA buttons */}
