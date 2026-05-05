@@ -83,7 +83,7 @@ export default function Home() {
         {/* Headline */}
         <h1
           className="animate-fade-up delay-100 font-display font-extrabold leading-[0.95] tracking-tight mb-6 max-w-4xl"
-          style={{ fontSize: "clamp(2.8rem, 7vw, 6rem)", color: "var(--text)" }}
+          style={{ fontSize: "clamp(2rem, 4.5vw, 3.75rem)", color: "var(--text)" }}
         >
           Your team is losing{" "}
           <span style={{ color: "var(--accent)" }}>10+ hours</span>

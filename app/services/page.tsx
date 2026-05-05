@@ -74,7 +74,7 @@ export default function Services() {
             Pricing
           </span>
           <h1
-            className="font-display font-extrabold text-5xl md:text-6xl mt-4 mb-4"
+            className="font-display font-extrabold text-4xl md:text-5xl mt-4 mb-4"
             style={{ color: "var(--text)" }}
           >
             Flat-rate packages.

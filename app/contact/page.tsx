@@ -20,7 +20,7 @@ export default function Contact() {
         <FadeIn>
           <span className="pill mb-4 inline-flex" style={{ color: "var(--text-muted)" }}>Free audit</span>
           <h1
-            className="font-display font-extrabold text-5xl md:text-6xl mt-4 mb-4"
+            className="font-display font-extrabold text-4xl md:text-5xl mt-4 mb-4"
             style={{ color: "var(--text)" }}
           >
             Book a Free Audit

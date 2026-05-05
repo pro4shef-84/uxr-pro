@@ -21,7 +21,7 @@ export default function About() {
           <FadeIn>
             <span className="pill mb-6 inline-flex" style={{ color: "var(--text-muted)" }}>Our story</span>
             <h1
-              className="font-display font-extrabold text-5xl md:text-6xl mt-4 mb-6 leading-tight"
+              className="font-display font-extrabold text-4xl md:text-5xl mt-4 mb-6 leading-tight"
               style={{ color: "var(--text)" }}
             >
               Built by operators,
