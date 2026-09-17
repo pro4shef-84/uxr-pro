@@ -19,12 +19,12 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Random Creation — Local Business Operations",
+  title: "Random Creation — More Customers. Less Admin.",
   description:
-    "One person handles your calls, Google listing, and website. Same owner every time. Denver-based. Month to month. No long contracts.",
+    "We answer every call, strengthen your Google presence, and connect the systems behind your local business. Denver-based and month-to-month.",
   openGraph: {
-    title: "Random Creation — Local Business Operations",
-    description: "One person to call. Not six logins.",
+    title: "Random Creation — More Customers. Less Admin.",
+    description: "Stop losing customers while you're busy doing the work.",
     type: "website",
   },
 };
@@ -40,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "@context": "https://schema.org",
               "@type": "LocalBusiness",
               name: "Random Creation",
-              description: "Local business operations: answering calls, Google listings, website management",
+              description: "Customer enquiry handling, Google Business Profile management, and connected operations for local businesses",
               telephone: "+1-303-218-0821",
               areaServed: "Denver, Colorado",
               url: "https://randomcreation.org",
