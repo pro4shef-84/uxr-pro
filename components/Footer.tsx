@@ -1,71 +1,58 @@
 "use client";
 
 import Link from "next/link";
+import { site } from "@/content/site";
 
 export default function Footer() {
   return (
-    <footer style={{ borderTop: "1px solid var(--border)", background: "var(--surface)" }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
-        <div>
-          <p className="font-display font-bold text-lg mb-3">
-            <span style={{ color: "var(--accent)" }}>Random</span>
-            <span className="text-white"> Creation</span>
-          </p>
-          <p className="text-sm leading-relaxed" style={{ color: "var(--text-muted)" }}>
-            AI automation studio. We deploy agents that run while you sleep, eliminate manual work, and compound over time.
-          </p>
-        </div>
+    <footer className="border-t mt-auto" style={{ borderColor: "var(--border)" }}>
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+          {/* About */}
+          <div>
+            <h3 className="font-display font-bold mb-4">Random Creation</h3>
+            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+              {site.footer.location}
+            </p>
+          </div>
 
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-dim)" }}>
-            Navigate
-          </p>
-          <ul className="space-y-2.5 text-sm">
-            {[
-              { href: "/",        label: "Home" },
-              { href: "/services",label: "Services" },
-              { href: "/about",   label: "About" },
-              { href: "/contact", label: "Contact" },
-            ].map((l) => (
-              <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className="transition-colors"
-                  style={{ color: "var(--text-muted)" }}
-                  onMouseEnter={(e) => (e.currentTarget.style.color = "var(--text)")}
-                  onMouseLeave={(e) => (e.currentTarget.style.color = "var(--text-muted)")}
-                >
-                  {l.label}
+          {/* Navigation */}
+          <div>
+            <h4 className="font-bold mb-4">Navigation</h4>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/" style={{ color: "var(--text-muted)" }}>
+                  Home
                 </Link>
               </li>
-            ))}
-          </ul>
+              <li>
+                <Link href="/services" style={{ color: "var(--text-muted)" }}>
+                  {site.nav.services}
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" style={{ color: "var(--text-muted)" }}>
+                  {site.nav.about}
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="font-bold mb-4">Get in touch</h4>
+            <a href="tel:303-218-0821" className="block text-sm mb-4" style={{ color: "var(--accent)" }}>
+              {site.footer.phone}
+            </a>
+            <Link href="/book" className="btn-secondary text-sm">
+              Book a walk-through
+            </Link>
+          </div>
         </div>
 
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-dim)" }}>
-            Contact
-          </p>
-          <ul className="space-y-2.5 text-sm" style={{ color: "var(--text-muted)" }}>
-            <li>randomcrtns@gmail.com</li>
-            <li>Denver, CO</li>
-          </ul>
-          <a
-            href="https://calendar.app.google/iDaJdHCUkck5Pvoo7"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-accent inline-flex mt-6 !py-2.5 !px-5 !text-sm !rounded-xl"
-          >
-            Book a call
-          </a>
+        <div className="border-t pt-8 text-center text-sm" style={{ borderColor: "var(--border)", color: "var(--text-dim)" }}>
+          <p>Random Creation · Denver, Colorado</p>
         </div>
-      </div>
-
-      <div
-        className="text-center py-5 text-xs"
-        style={{ borderTop: "1px solid var(--border)", color: "var(--text-dim)" }}
-      >
-        © {new Date().getFullYear()} Random Creation. All rights reserved.
       </div>
     </footer>
   );
